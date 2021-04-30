@@ -1,0 +1,98 @@
+
+别人不依赖，写false
+组件如果别人有依赖，就写true,  会检查容器中是否有这个组件
+@Configurantion +@Bean 注册组件  自定义配置类
+主配置类？
+
+以前注册:
+@Component: 代表是组件
+@Controller: 代表控制器
+@Service  : 代表是业务逻辑组件
+@Repository: 代表是数据库组件
+
+@Import: 写在容器中的组件类上
+导入   class<>[]  class 数组
+
+@Import({User.class, DBHelper.class})
+给容器中自动创建这2个类型的组件，调用无参构造器
+默认组件的全类名 com.example.demo.User, 不是user01
+
+
+//获取组件
+  run.getBeanNameForType(User.class);
+  for()
+
+@Conditional
+条件装配，满足的条件，才给容器中注入组件
+根注解
+
+主实例@Primary
+Ctrl+H  打开继承数
+
+当容器中存在某个Bean, 方法/类才生效
+当容器中没有这个bean的时候
+当容器中有某一个类
+当容器中有类路径存在某个资源
+@ConditionalOnMissingBean（仅仅在当前上下文中不存在某个对象时，才会实例化一个Bean）
+
+
+
+ run.getBean("tom")
+ run.getBean(Myconfig.class)
+ run.containsBean("tom") -- 注释@Bean pet，  容器中就不注册
+
+@ConditianlOnBean(name="tom")
+User {}
+当容器中有tom这个组件的时候，下面的代码才生效（类或者@Bean)
+
+@ImportResource
+Bean.xml 文件配置的组件，spring boot识别不了
+1. 写成@Bean
+2  在某个配置类上， 导入某个资源，指定资源路径，相当于把资源重新解析放到容器里，导入一次即可，
+ @ImportResource（classpath:beans.xml)
+
+配置绑定
+只有在容器中的组件，才能拥有springboot提供的强大功能
+@component  +
+@ConfigureProperties（prefix="")
+Public class Car(){}
+类的每一个属性与配置文件前缀== 的绑定
+.properties --> 创建数据库连接池JavaBean
+K v 遍历正则表达式解析
+Car 引用的第三方，没有@component
+
+在一个配置类@Configruation的上面，加一个配置
+@EnableConfigurationProperties(Car.class)
+1 开启Car属性配置绑定
+2 把这个Car 这个组件自动注入到容器中
+
+自动配置原理:
+ main 
+  SpringBootApplication
+
+@Configuration  : 代表当前是一个配置类
+@ComponentScan ： 指定扫描的东西             spring注解版有解释                 
+@EnableAutoConfiguration ： 
+
+@AutoConfigurationPackage   自动配置包
+@Import({AutoConfigurationImportSelector.class})
+public@interfaceEnableAutoConfiguration{
+
+导入一系列组件
+将指定的一个包下的所有组件，导入进来，DemoApplication所在包下
+
+文件里面写死了，springboot一启动，就要给容器中加载的所有的配置类
+包：Springboot-autoconfigration-2.2.4/META-IN/spring.factories
+
+ run.getBeanCount
+
+按需开启自动配置项
+
+最终按照条件装配规则，按需配置
+
+
+给@Bean标注的方法，传入了对象参数，这个参数的值，会从容器中找
+// 防止用户文件上传的解析器不符合规范，
+Spring boot  return规范了名字 return 
+Return Dis  
+  public void ss(@RequestParam("name") String name)
